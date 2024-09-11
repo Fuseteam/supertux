@@ -1,0 +1,61 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1656928814,
+        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1658422817,
+        "narHash": "sha256-kzZrlzqK6kbkTEnDK21wjRDamUJP0m30pm3XRPk0aZg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "70e3e0ee807371e16563a88b77b8533e2cea8aa2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "raqm_src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1632761857,
+        "narHash": "sha256-Zv6h5Z9X9H1gc/tDy0GPdOCWOaJwM7UbQOPQI2jRDOo=",
+        "owner": "HOST-Oman",
+        "repo": "libraqm",
+        "rev": "573820451937d7a7f33a1ec132bc1f1b12db917f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "HOST-Oman",
+        "ref": "v0.7.2",
+        "repo": "libraqm",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs",
+        "raqm_src": "raqm_src"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
