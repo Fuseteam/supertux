@@ -275,6 +275,17 @@ target_link_libraries(supertux2_lib PUBLIC LibFmt)
 target_link_libraries(supertux2_lib PUBLIC LibPhysfs)
 
 if(NOT EMSCRIPTEN)
+  if(MIR_BUILD)
+        message("FOR MIR BUILD BELOW IS REQUIRED")
+        find_package(SDL2 REQUIRED)
+
+        find_package(Qt5Core REQUIRED)
+        find_package(Qt5Gui REQUIRED)
+        target_link_directories(supertux2_lib PUBLIC ${SDL2_LIBDIR})
+        target_link_libraries(supertux2_lib PUBLIC Qt5::Core Qt5::Gui)
+
+    endif()
+
   target_link_libraries(supertux2_lib PUBLIC LibSDL2_ttf)
   target_link_libraries(supertux2_lib PUBLIC LibSDL2 LibSDL2_image)
   target_link_libraries(supertux2_lib PUBLIC LibOggVorbis)

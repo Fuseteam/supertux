@@ -13,7 +13,9 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+#ifndef MIR_BUILD
+#define MIR_BUILD
+#endif
 #include <SDL.h>
 
 #include <config.h>
@@ -23,8 +25,14 @@
 
 static std::unique_ptr<Main> g_main;
 
+#if defined(MIR_BUILD)
+#include <QGuiApplication>
+#endif
+
 int main(int argc, char** argv)
 {
+    QGuiApplication app(argc, argv);
+
   g_main = std::make_unique<Main>();
 
   int ret = g_main->run(argc, argv);
@@ -35,7 +43,8 @@ int main(int argc, char** argv)
   g_main.reset();
 #endif
 
-  return ret;
+  //return ret;
+  return app.exec();
 }
 
 /* EOF */
