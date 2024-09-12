@@ -1,4 +1,7 @@
 option(USE_SYSTEM_SDL2_TTF "Use preinstalled SDL2_ttf if available" OFF)
+IF(NOT MIR_BUILD)
+set(MIR_BUILD OFF)
+endif()
 if(USE_SYSTEM_SDL2_TTF)
   find_package(SDL2_ttf QUIET)
 endif()
@@ -46,6 +49,7 @@ else()
     -DRAQM_LIBRARIES=${RAQM_LIBRARY}
     -DRAQM_INCLUDE_DIR=${RAQM_INCLUDE_DIR}
     -DBUILD_SHARED_LIBS=OFF
+    -DMIR_BUILD=${MIR_BUILD}
     -DEMSCRIPTEN=${EMSCRIPTEN})
 
   # Pre-create directory so that cmake doesn't complain about its non-existance
@@ -65,6 +69,7 @@ else()
       ${FRIBIDI_LIBRARY}
       ${RAQM_LIBRARY})
   endif()
+
 
   add_library(LibSDL2_ttf STATIC IMPORTED)
   target_link_libraries(LibSDL2_ttf INTERFACE "${SDL2_TTF_LINK_LIBRARIES}")

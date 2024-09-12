@@ -1,4 +1,10 @@
 message(STATUS "Checking for SDL2")
+
+IF(MIR_BUILD)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+
+else()
 if(WIN32 AND NOT MINGW)
   if(VCPKG_BUILD)
     find_package(SDL2 CONFIG REQUIRED)
@@ -46,6 +52,7 @@ else()
   endif()
 endif()
 set(HAVE_SDL TRUE)
+endif()
 
 message(STATUS "  SDL2_LIBRARIES: ${SDL2_LIBRARIES}")
 message(STATUS "  SDL2_INCLUDE_DIRS: ${SDL2_INCLUDE_DIRS}")
