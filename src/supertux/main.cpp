@@ -14,6 +14,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+
 #include "supertux/main.hpp"
 
 #include <config.h>
@@ -513,8 +515,12 @@ Main::launch_game(const CommandLineArguments& args)
   if (getenv("ANDROID_TV")) {
     g_config->mobile_controls = false;
   }
+
 #endif
 
+#ifdef MIR_BUILD
+  g_config->mobile_controls = true;
+#endif
   s_timelog.log("controller");
   m_input_manager.reset(new InputManager(g_config->keyboard_config, g_config->joystick_config));
 

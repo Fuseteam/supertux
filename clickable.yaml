@@ -8,7 +8,7 @@ env_vars:
   PKG_CONFIG_PATH: "/usr/lib/${ARCH_TRIPLET}/dev/pkgconfig"
 dependencies_target:
   - "nano"
-  - "&& wget https://ubportslibpatches.github.io/ubporrts_ppa/dists/focal/sdl2mir_${ARCH_TRIPLET}.deb &&  dpkg -i ./sdl2mir_${ARCH_TRIPLET}.deb && wget https://ubportslibpatches.github.io/ubporrts_ppa/dists/focal/sdl2-image_${ARCH_TRIPLET}.deb && dpkg -i ./sdl2-image_${ARCH_TRIPLET}.deb  && apt-get install -y --force-yes --no-install-recommends net-tools"
+  - "&& wget http://192.168.1.6:9999/sdl2mir_${ARCH_TRIPLET}.deb &&  dpkg -i ./sdl2mir_${ARCH_TRIPLET}.deb && wget http://192.168.1.6:9999/sdl2-image_${ARCH_TRIPLET}.deb && dpkg -i ./sdl2-image_${ARCH_TRIPLET}.deb  && apt-get install -y --force-yes --no-install-recommends net-tools"
   - "libogg-dev"
   - "libopenal-dev"
   - "libfreetype6-dev"
