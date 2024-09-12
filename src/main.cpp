@@ -21,10 +21,17 @@
 
 #include "supertux/main.hpp"
 
+#ifdef MIR_BUILD
+//required
+#include <QGuiApplication>
+#endif
 static std::unique_ptr<Main> g_main;
 
 int main(int argc, char** argv)
 {
+#ifdef MIR_BUILD
+    QGuiApplication app(argc, argv);
+#endif
   g_main = std::make_unique<Main>();
 
   int ret = g_main->run(argc, argv);
@@ -34,8 +41,8 @@ int main(int argc, char** argv)
   // destructors and thus would make the destruction crash.
   g_main.reset();
 #endif
+  return 0;
 
-  return ret;
 }
 
 /* EOF */
