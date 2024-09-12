@@ -1,28 +1,35 @@
-clickable_minimum_required: 7
+clickable_minimum_required: 8
+builder: cmake
+kill: supertux2
 framework: "ubuntu-sdk-20.04"
 builder: "cmake"
 build_dir: "build.clickable"
+env_vars:
+  PKG_CONFIG_PATH: "/usr/lib/${ARCH_TRIPLET}/dev/pkgconfig"
 dependencies_target:
+  - "nano"
+  - "&& wget https://ubportslibpatches.github.io/ubporrts_ppa/dists/focal/sdl2mir_${ARCH_TRIPLET}.deb &&  dpkg -i ./sdl2mir_${ARCH_TRIPLET}.deb && wget https://ubportslibpatches.github.io/ubporrts_ppa/dists/focal/sdl2-image_${ARCH_TRIPLET}.deb && dpkg -i ./sdl2-image_${ARCH_TRIPLET}.deb  && apt-get install -y --force-yes --no-install-recommends net-tools"
   - "libogg-dev"
-  - "libvorbis-dev"
   - "libopenal-dev"
-  - "libsdl2-dev"
-  - "libsdl2-image-dev"
   - "libfreetype6-dev"
   - "libcurl4-openssl-dev"
   - "libharfbuzz-dev"
   - "libfribidi-dev"
   - "libglm-dev"
   - "zlib1g-dev"
+  - "libpng-dev"
+  - "libvorbis-dev"
+  - "libraqm-dev"
+
 install_lib:
   - "/usr/lib/${ARCH_TRIPLET}/libogg.so*"
   - "/usr/lib/${ARCH_TRIPLET}/libvorbis.so*"
   - "/usr/lib/${ARCH_TRIPLET}/libvorbisfile.so*"
   - "/usr/lib/${ARCH_TRIPLET}/libopenal.so*"
-  - "/usr/lib/${ARCH_TRIPLET}/libSDL2.so*"
-  - "/usr/lib/${ARCH_TRIPLET}/libSDL2-2.0.so*"
-  - "/usr/lib/${ARCH_TRIPLET}/libSDL2_image.so*"
-  - "/usr/lib/${ARCH_TRIPLET}/libSDL2_image-2.0.so*"
+  - "/usr/lib/${ARCH_TRIPLET}/dev/libSDL2.so*"
+  - "/usr/lib/${ARCH_TRIPLET}/dev/libSDL2-2.0.so*"
+  - "/usr/lib/${ARCH_TRIPLET}/dev/libSDL2_image.so*"
+  - "/usr/lib/${ARCH_TRIPLET}/dev/libSDL2_image-2.0.so*"
   - "/usr/lib/${ARCH_TRIPLET}/libfreetype.so*"
   - "/usr/lib/${ARCH_TRIPLET}/libcurl.so*"
   - "/usr/lib/${ARCH_TRIPLET}/libharfbuzz.so*"
@@ -30,6 +37,7 @@ install_lib:
   - "/usr/lib/${ARCH_TRIPLET}/libasound.so*"
   - "/usr/lib/${ARCH_TRIPLET}/libsndio.so*"
   - "/lib/${ARCH_TRIPLET}/libz.so.1.2.11"
+  - "/lib/${ARCH_TRIPLET}/libraqm.so*"
 build_args:
   - "-DUBUNTU_TOUCH=ON"
   - "-DENABLE_OPENGL=OFF"
@@ -37,3 +45,4 @@ build_args:
   - "-DWERROR=ON"
   - "-DCLICK_ARCH=${ARCH}"
   - "-DCLICK_FRAMEWORK=ubuntu-sdk-20.04"
+  - "-DMIR_BUILD=ON"

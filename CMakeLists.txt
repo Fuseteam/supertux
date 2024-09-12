@@ -275,6 +275,12 @@ target_link_libraries(supertux2_lib PUBLIC LibFmt)
 target_link_libraries(supertux2_lib PUBLIC LibPhysfs)
 
 if(NOT EMSCRIPTEN)
+  IF(MIR_BUILD)
+  find_package(SDL2 REQUIRED)
+  find_package(SDL2_image REQUIRED)
+    target_link_directories(supertux2_lib PUBLIC ${SDL2_LIBDIR})
+
+  endif()
   target_link_libraries(supertux2_lib PUBLIC LibSDL2_ttf)
   target_link_libraries(supertux2_lib PUBLIC LibSDL2 LibSDL2_image)
   target_link_libraries(supertux2_lib PUBLIC LibOggVorbis)
