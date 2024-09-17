@@ -30,6 +30,8 @@ static std::unique_ptr<Main> g_main;
 int main(int argc, char** argv)
 {
 #ifdef MIR_BUILD
+    qputenv("SDL_VIDEODRIVER","");
+    qputenv("QT_QPA_PLATFORM","ubuntumirclient");
     QGuiApplication app(argc, argv);
 #endif
   g_main = std::make_unique<Main>();
