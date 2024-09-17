@@ -20,6 +20,7 @@ dependencies_target:
   - "libpng-dev"
   - "libvorbis-dev"
   - "libraqm-dev"
+  - "libhybris-dev"
 
 install_lib:
   - "/usr/lib/${ARCH_TRIPLET}/libogg.so*"
@@ -38,6 +39,8 @@ install_lib:
   - "/usr/lib/${ARCH_TRIPLET}/libsndio.so*"
   - "/lib/${ARCH_TRIPLET}/libz.so.1.2.11"
   - "/lib/${ARCH_TRIPLET}/libraqm.so*"
+  - "/lib/${ARCH_TRIPLET}/libEGL_libhybris.so.0"
+  - "/lib/${ARCH_TRIPLET}/libEGL_libhybris.so.0.*"
 build_args:
   - "-DUBUNTU_TOUCH=ON"
   - "-DENABLE_OPENGL=OFF"
