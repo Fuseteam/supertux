@@ -34,10 +34,6 @@ jobs:
         arch: [amd64, arm64, armhf]
         # glbinding is missing as it isn't available on Ubuntu 16.04
         opengl: [ sdl ]
-        exclude:
-            # FIXME: Debug builds don't work for arm64
-          - arch: arm64
-            build_type: Debug
 
     runs-on: ubuntu-20.04
     steps:
