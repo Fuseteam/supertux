@@ -21,6 +21,7 @@ on:
   push:
     branches:
       - master
+      - sdL_wayland_ut
     tags:
       - '*'
   pull_request: {}
