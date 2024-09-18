@@ -83,7 +83,7 @@ SDLBaseVideoSystem::on_resize(int w, int h)
 void
 SDLBaseVideoSystem::create_sdl_window(Uint32 flags)
 {
-  flags |= SDL_WINDOW_RESIZABLE;
+   flags |= SDL_WINDOW_RESIZABLE;
 
   Size size;
   if (g_config->use_fullscreen)
@@ -114,15 +114,15 @@ SDLBaseVideoSystem::create_sdl_window(Uint32 flags)
          SDL version is too old. Please use SDL >= 2.0.10 to compile for       \
          Android.
 #endif
-
-  m_sdl_window.reset(SDL_CreateWindow("SuperTux",
+   m_sdl_window.reset(SDL_CreateWindow("SuperTux",
                                       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                       size.width, size.height,
-                                      flags));
-  if (!m_sdl_window)
+                                       flags));
+
+   if (!m_sdl_window)
   {
     std::ostringstream msg;
-    msg << "Couldn't set video mode " << size.width << "x" << size.height << ": " << SDL_GetError();
+    msg << "Couldn't set video modes " << size.width << "x" << size.height << ": " << SDL_GetError();
     throw std::runtime_error(msg.str());
   }
 

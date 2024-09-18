@@ -44,3 +44,4 @@ StartupNotify=false
 Categories=Game;ArcadeGame;
 Keywords=game;arcade;platform;
 X-Ubuntu-Touch=true
+X-Ubuntu-Supported-Orientations=landscape

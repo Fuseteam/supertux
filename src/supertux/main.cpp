@@ -91,7 +91,7 @@ extern "C" {
 #include "video/ttf_surface_manager.hpp"
 #include "worldmap/worldmap.hpp"
 #include "worldmap/worldmap_screen.hpp"
-
+#include "sstream"
 static Timelog s_timelog;
 
 ConfigSubsystem::ConfigSubsystem() :
@@ -433,6 +433,7 @@ SDLSubsystem::SDLSubsystem()
 #ifndef UBUNTU_TOUCH
   flags |= SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER;
 #endif
+
   if (SDL_Init(flags) < 0)
   {
     std::stringstream msg;
@@ -520,6 +521,10 @@ Main::launch_game(const CommandLineArguments& args)
 
 #ifdef MIR_BUILD
   g_config->mobile_controls = true;
+#endif
+#ifdef WAYLAND_UT
+  g_config->mobile_controls = true;
+
 #endif
   s_timelog.log("controller");
   m_input_manager.reset(new InputManager(g_config->keyboard_config, g_config->joystick_config));

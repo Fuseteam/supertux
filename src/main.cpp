@@ -25,15 +25,31 @@
 //required
 #include <QGuiApplication>
 #endif
-static std::unique_ptr<Main> g_main;
+//static std::unique_ptr<Main> g_main;
+#ifdef WAYLAND_UT
+static Main* g_main;
 
+#include <QGuiApplication>
+#endif
 int main(int argc, char** argv)
 {
+
 #ifdef MIR_BUILD
-    qputenv("SDL_VIDEODRIVER","");
-    qputenv("QT_QPA_PLATFORM","ubuntumirclient");
-    QGuiApplication app(argc, argv);
+#define CUSTOM_BUILD
+     qputenv("SDL_VIDEODRIVER","");
+     qputenv("QT_QPA_PLATFORM","ubuntumirclient");
+     QGuiApplication app(argc, argv);
 #endif
+#ifdef WAYLAND_UT
+#define CUSTOM_BUILD
+     qputenv("SDL_VIDEODRIVER","wayland");
+     QGuiApplication app(argc, argv);
+     g_main = new Main();
+     g_main->run(argc, argv);
+     return 0;
+#endif
+
+#ifndef CUSTOM_BUILD
   g_main = std::make_unique<Main>();
 
   int ret = g_main->run(argc, argv);
@@ -45,6 +61,7 @@ int main(int argc, char** argv)
 #endif
   return 0;
 
+#endif
 }
 
 /* EOF */
