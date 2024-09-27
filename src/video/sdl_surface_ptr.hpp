@@ -78,6 +78,8 @@ public:
 
   void reset(SDL_Surface* surface)
   {
+
+
     SDL_FreeSurface(m_surface);
     m_surface = surface;
   }

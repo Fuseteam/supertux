@@ -27,7 +27,8 @@ else()
   # of lists is impossible. ExternalProject_Add provides LIST_SEPARATOR
   # to work around this limitations by using a different separator.
   string(REPLACE ";" "|" TINYGETTEXT_SDL2_INCLUDE_DIRS "${SDL2_INCLUDE_DIRS}")
-
+  message("Hello world")
+  message(${CMAKE_BINARY_DIR})
   set(TINYGETTEXT_PREFIX ${CMAKE_BINARY_DIR}/tinygettext)
   ExternalProject_Add(tinygettext_project
     SOURCE_DIR "${CMAKE_SOURCE_DIR}/external/tinygettext/"

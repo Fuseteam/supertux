@@ -21,19 +21,23 @@
 
 #include "supertux/main.hpp"
 
-#ifdef MIR_BUILD
-//required
+#ifdef UBUNTU_TOUCH
 #include <QGuiApplication>
 #endif
 static std::unique_ptr<Main> g_main;
 
 int main(int argc, char** argv)
 {
-#ifdef MIR_BUILD
-    qputenv("SDL_VIDEODRIVER","");
-    qputenv("QT_QPA_PLATFORM","ubuntumirclient");
-    QGuiApplication app(argc, argv);
+#ifdef DROIDIAN
+    qputenv("SDL_VIDEODRIVER","wayland");
+    qputenv("EGL_PLATFORM", "wayland");
 #endif
+#ifdef UBUNTU_TOUCH
+     qputenv("SDL_VIDEODRIVER","wayland");
+     qputenv("EGL_PLATFORM", "wayland");
+     QGuiApplication app(argc, argv);
+#endif
+
   g_main = std::make_unique<Main>();
 
   int ret = g_main->run(argc, argv);

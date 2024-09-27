@@ -433,6 +433,7 @@ SDLSubsystem::SDLSubsystem()
 #ifndef UBUNTU_TOUCH
   flags |= SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER;
 #endif
+
   if (SDL_Init(flags) < 0)
   {
     std::stringstream msg;
@@ -446,7 +447,27 @@ SDLSubsystem::SDLSubsystem()
     msg << "Couldn't initialize SDL TTF: " << SDL_GetError();
     throw std::runtime_error(msg.str());
   }
+#ifdef UBUNTU_TOUCH
+#ifdef USE_OPENGLES2
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+#endif
+#endif
+#ifdef DROIDIAN
+
+#ifdef USE_OPENGLES2
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+#endif
+#endif
   // just to be sure
   atexit(TTF_Quit);
   atexit(SDL_Quit);
@@ -510,6 +531,7 @@ Main::launch_game(const CommandLineArguments& args)
   m_physfs_subsystem->remount_datadir_static();
 
   m_sdl_subsystem.reset(new SDLSubsystem());
+  log_info << SDL_GetError();
   m_console_buffer.reset(new ConsoleBuffer());
 #ifdef ENABLE_TOUCHSCREEN_SUPPORT
   if (getenv("ANDROID_TV")) {
@@ -518,8 +540,9 @@ Main::launch_game(const CommandLineArguments& args)
 
 #endif
 
-#ifdef MIR_BUILD
+#ifdef UBUNTU_TOUCH
   g_config->mobile_controls = true;
+
 #endif
   s_timelog.log("controller");
   m_input_manager.reset(new InputManager(g_config->keyboard_config, g_config->joystick_config));

@@ -83,9 +83,13 @@ SDLBaseVideoSystem::on_resize(int w, int h)
 void
 SDLBaseVideoSystem::create_sdl_window(Uint32 flags)
 {
-  flags |= SDL_WINDOW_RESIZABLE;
-
-  Size size;
+   flags |= SDL_WINDOW_RESIZABLE;
+#ifdef UBUNTU_TOUCH
+#ifdef USE_OPENGLES2
+  flags |= SDL_WINDOW_OPENGL;
+#endif
+#endif
+  Size size; 
   if (g_config->use_fullscreen)
   {
     if (g_config->fullscreen_size == Size(0, 0))
@@ -115,11 +119,12 @@ SDLBaseVideoSystem::create_sdl_window(Uint32 flags)
          Android.
 #endif
 
+
   m_sdl_window.reset(SDL_CreateWindow("SuperTux",
                                       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                      size.width, size.height,
-                                      flags));
-  if (!m_sdl_window)
+                                      size.width, size.height , flags));
+
+   if (!m_sdl_window)
   {
     std::ostringstream msg;
     msg << "Couldn't set video mode " << size.width << "x" << size.height << ": " << SDL_GetError();

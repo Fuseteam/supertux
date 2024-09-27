@@ -70,7 +70,10 @@ SDLVideoSystem::create_window()
 
   create_sdl_window(0);
 
-  m_sdl_renderer.reset(SDL_CreateRenderer(m_sdl_window.get(), -1, 0));
+  m_sdl_renderer.reset(SDL_CreateRenderer(m_sdl_window.get(), -1,  SDL_RENDERER_ACCELERATED));
+#ifdef UBUNTU_TOUCH
+  SDL_SetWindowFullscreen(m_sdl_window.get(), SDL_TRUE );
+#endif
   if (!m_sdl_renderer)
   {
     std::stringstream msg;

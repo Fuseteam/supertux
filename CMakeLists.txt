@@ -275,16 +275,14 @@ target_link_libraries(supertux2_lib PUBLIC LibFmt)
 target_link_libraries(supertux2_lib PUBLIC LibPhysfs)
 
 if(NOT EMSCRIPTEN)
-  IF(MIR_BUILD)
+
+  IF(UBUNTU_TOUCH)
     find_package(Qt5Gui REQUIRED)  #LOMIRI doesnt start without starting QGui
     find_package(Qt5Core REQUIRED)
-    pkg_search_module(Hybris REQUIRED hybris-egl-platform > 0.1.0)
-
-    target_compile_definitions(supertux2_lib PUBLIC MIR_BUILD=1)
-    target_link_directories(supertux2_lib PUBLIC ${SDL2_LIBDIR} ${Hybris_LIBDIR})
+    target_compile_definitions(supertux2_lib PUBLIC USE_OPENGLES2=ON)
     target_link_libraries(supertux2_lib PUBLIC Qt5::Gui Qt5::Core)
-    target_link_libraries(supertux2_lib PUBLIC ${Hybris_LIBRARIES})
   endif()
+
   target_link_libraries(supertux2_lib PUBLIC LibSDL2_ttf)
   target_link_libraries(supertux2_lib PUBLIC LibSDL2 LibSDL2_image)
   target_link_libraries(supertux2_lib PUBLIC LibOggVorbis)
